@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../components/header/header.css">
+    <link rel="stylesheet" href="../components/review/review.css">
+    <link rel="stylesheet" href="../components/footer/footer.css">
+    <link rel="stylesheet" href="../assets/global-styles/typography.css">
+    <link rel="shortcut icon" href="../assets/images/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="../components/header/header.js" defer></script>
+    <script src="../components/footer/footer.js"></script>
+    <script type="module" src="../utils/firebase_init.js"></script>
+    <script type="module" src="../utils/firebase_create.js"></script>
+    <script type="module" src="../utils/firebase_read.js"></script>
+    <script type="module" src="../utils/firebase_delete.js"></script>
+    <script type="module" src="../utils/firebase_login.js"></script>
+
+    <title>Review | Dylan Fry</title>
+</head>
+<body>
+
+    <div id="placeholder"></div>
+    
+    <div id="loadingPage" class="loading">
+        <h1>Loading...</h1>
+    </div>
+
+    <div id="signInPage" class="hidden sign-in-page">
+        <section id="signUpGroup" class="sign-up-group">
+            <input class="user-input" id="signUpName" type="text" placeholder="Username">
+            <input class="user-input"  id="signUpEmail"  type="text" placeholder="Email">
+            <input class="user-input"  id="signUpPassword"  type="password" placeholder="Password" autocomplete="off">
+            <button class="user-input"  id="signUpButton">Sign Up</button>
+        </section>
+        <section id="signInGroup" class="sign-in-group">
+            <input class="user-input"  id="signInEmail" type="text" placeholder="Email">
+            <input class="user-input"  id="signInPassword" type="password" placeholder="Password" autocomplete="off">
+            <button class="user-input"  id="signInButton">Log In</button>
+        </section>
+    </div>
+
+    <div id="verificationPage" class="notice hidden">
+        <h1>Please Verify Your Account To Continue</h1>
+        <h2>An email should have been sent to you. If you haven't revieved one, check your spam.</h2>
+        <h2>If you still haven't revieved an email, <span id="resendButton">click here to try again.</span></h2>
+        <h3>Once you have verified your email, reload this page.</h3>
+    </div>
+
+    <div id="mainPage" class="wrapper hidden">
+
+        <section id="deleteConfirmation" class="popup hidden">
+            <h1>Are you sure?</h1>
+            <button id="confirm" class="user-input">Delete</button>
+            <button id="cancel" class="user-input">Cancel</button>
+        </section>
+
+        <section id="deleteSuccessMessage" class="popup hidden">
+            <h1>Post Deleted Successfully</h1>
+            <button id="continue" class="user-input">Okay</button>
+        </section>
+
+        <h1 class="title">Review a Project</h1>
+        <p class="description">If you want to review one of the projects listed on this site, fill out the form below.</p>
+        <div id="reviewForm" class="review-form">
+            <div id="identityControls" class="identity-controls">
+                <p id="name"></p>
+                <button class="user-input sign-out" id="signOut">Sign Out</button>
+            </div>
+            <select id="projectSelector" class="project-selector">
+                <option value="0">-- Select a project --</option>
+                <option value=1>SpinR</option>
+                <option value=2>Scriptux</option>
+                <option value=3>Patient Health Record</option>
+            </select>
+            <div id="rating" class="rating">
+                <i class="fa fa-star-o" id="1Star"></i>
+                <i class="fa fa-star-o" id="2Stars"></i>
+                <i class="fa fa-star-o" id="3Stars"></i>
+                <i class="fa fa-star-o" id="4Stars"></i>
+                <i class="fa fa-star-o" id="5Stars"></i>
+            </div>
+            <textarea id="message" class="message" placeholder="comment"></textarea>
+            <button id="submitForm" class="submit-form">Submit Review</button>
+            <button id="deleteReview" class="delete-review">Delete Review</button>
+        </div>
+    </div>
+    
+    <div id="placeholderFooter"></div>
+</body>
+</html>
