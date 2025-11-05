@@ -1,0 +1,128 @@
+@media (max-width: 1080px) {
+  
+  .wrapper {
+    margin-left: 2vw;
+    margin-right: 2vw;
+    display: grid;
+    grid-template-columns: 10vw 30vw 7vw auto;
+    grid-template-rows: 7vw 7vw 30vw 10vw auto 10vw;
+    flex-grow: 1;
+  }
+  
+  .welcome-message {
+    grid-column: 4/5;
+    grid-row: 2/3;
+    font-family: inter;
+    font-size: 3.3vw;
+  }
+  
+  .body-text {
+    grid-column: 4/5;
+    grid-row: 3/4;
+    font-family: inter;
+    font-size: 1.6vw;
+    width: 45vw;
+  }
+  
+}
+
+@media (min-width: 1080px) {
+  
+  .wrapper {
+    margin-left: 2vw;
+    margin-right: 2vw;
+    display: grid;
+    grid-template-columns: 10vw 20vw 7vw auto;
+    grid-template-rows: 7vw 7vw 20vw 10vw auto 10vw;
+    flex-grow: 1;
+  }
+  .welcome-message {
+    grid-column: 4/5;
+    grid-row: 2/3;
+    font-family: inter;
+    font-size: 2.8vw;
+  }
+  
+  .body-text {
+    grid-column: 4/5;
+    grid-row: 3/4;
+    font-family: inter;
+    font-size: 1.6vw;
+    width: 45vw;
+  }
+  
+}
+
+@media (min-width: 1280px) {
+  
+  .welcome-message {
+    grid-column: 4/5;
+    grid-row: 2/3;
+    font-family: inter;
+    font-size: 2.2vw;
+  }
+  
+  .body-text {
+    grid-column: 4/5;
+    grid-row: 3/4;
+    font-family: inter;
+    font-size: 1.2vw;
+    width: 45vw;
+  }
+
+}
+
+.profile-image {
+  grid-column: 2/3;
+  grid-row: 2/4;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0.4vh solid #1E2019;
+  border-radius: 5px;
+}
+
+.gallery-wrapper {
+  grid-row: 5/6;
+  grid-column: 1/5;
+  display: grid;
+  grid-template-columns: 28% 8% 28% 8% 28%;
+  grid-template-rows: auto;
+}
+
+.gallery {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border: 0.4vh solid #1E2019;
+  border-radius: 5px;
+}
+
+.gallery-first {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.gallery-second {
+  grid-column: 3/4;
+  grid-row: 1/2;
+}
+
+.gallery-last {
+  grid-column: 5/6;
+  grid-row: 1/2;
+}
+
+.fa {
+  color:#1E2019;
+  text-decoration: none;
+}
+
+.fa:hover {
+  text-decoration: none;
+  color: #52528C;
+}
+
+span {
+  font-family: inter;
+}
