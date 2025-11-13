@@ -3,7 +3,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: //API KEY HERE,
+  apiKey: //API Key Here,
   authDomain: "personal-portfolio---hosted.firebaseapp.com",
   databaseURL: "https://personal-portfolio---hosted-default-rtdb.firebaseio.com",
   projectId: "personal-portfolio---hosted",

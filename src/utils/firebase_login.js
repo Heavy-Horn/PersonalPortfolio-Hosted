@@ -70,7 +70,12 @@ onAuthStateChanged(auth, (user) => {
 
 signup.addEventListener("click", () => {
   console.log("Signing Up")
-  if (signUpName.value.trimmed != undefined) {
+  console.log(signUpName.value)
+  let displayNameRaw = signUpName.value
+  console.log(displayNameRaw)
+  let trimmedDisplayName = displayNameRaw.trim()
+  console.log(trimmedDisplayName)
+  if (trimmedDisplayName != '') {
     const displaynames = ref(db, `users/${signUpName.value}`);
     get(displaynames).then((snapshot) => {
       if (snapshot.exists()) {
