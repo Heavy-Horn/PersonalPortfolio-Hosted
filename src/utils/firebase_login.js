@@ -8,6 +8,16 @@ import {
   signOut 
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+import { 
+  getDatabase, 
+  set, 
+  ref,
+  get
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+import { app } from './firebase_init.js';
+
+const logOutVerification = document.getElementById("logoutButton");
 const resend = document.getElementById("resendButton");
 const page = document.getElementById("mainPage");
 const loginPage = document.getElementById("signInPage");
@@ -22,7 +32,9 @@ const userNameDisplay = document.getElementById("name");
 const signUpEmail = document.getElementById("signUpEmail");
 const signUpPassword = document.getElementById("signUpPassword");
 const signUpName = document.getElementById("signUpName");
+const errorMessageDisplay = document.getElementById("errorcode");
 const auth = getAuth();
+const db = getDatabase(app);
 
 loadingPage.classList.remove("hidden");
 loginPage.classList.add("hidden");
@@ -58,31 +70,60 @@ onAuthStateChanged(auth, (user) => {
 
 signup.addEventListener("click", () => {
   console.log("Signing Up")
-  createUserWithEmailAndPassword(auth, signUpEmail.value, signUpPassword.value)
-  .then((userCredential) => {
-    const user = userCredential.user;
-    updateProfile(user, {
-      displayName: signUpName.value
-    });
-    signUpEmail.value = '';
-    signUpName.value = '';
-    signUpPassword.value = '';
-    sendEmailVerification(auth.currentUser)
-    .then(
-      console.log('Confirmation Email Sent')
-    )
-    .catch((error) => {
-      const errorCode = error.code
-      const errorMessage = error.message
-      console.log(errorMessage)
-    });
-    userNameDisplay.innerHTML = user.displayName;
-  })
-  .catch((error) => {
-    const errorCode = error.code
-    const errorMessage = error.message
-    console.log(errorMessage)
-  });
+  if (signUpName.value.trimmed != undefined) {
+    const displaynames = ref(db, `users/${signUpName.value}`);
+    get(displaynames).then((snapshot) => {
+      if (snapshot.exists()) {
+        errorMessageDisplay.classList.remove('hidden');
+        errorMessageDisplay.innerHTML = "Display Name Taken";
+      } else {
+        createUserWithEmailAndPassword(auth, signUpEmail.value, signUpPassword.value)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          updateProfile(user, {
+            displayName: signUpName.value
+          });
+          set(ref(db, `users/${signUpName.value}`),{
+            exists: true
+          });
+          signUpEmail.value = '';
+          signUpName.value = '';
+          signUpPassword.value = '';
+          sendEmailVerification(auth.currentUser)
+          .then(
+            console.log('Confirmation Email Sent')
+          )
+          .catch((error) => {
+            const errorCode = error.code
+            const errorMessage = error.message
+            console.log(errorMessage)
+          });
+          userNameDisplay.innerHTML = user.displayName;
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          switch (errorMessage) {
+            case 'Firebase: Error (auth/invalid-credential).':
+              errorMessageDisplay.classList.remove('hidden');
+              errorMessageDisplay.innerHTML = "Invalid Password";
+              break
+            case 'Firebase: Error (auth/invalid-email).':
+              errorMessageDisplay.classList.remove('hidden');
+              errorMessageDisplay.innerHTML = "Invalid Email";
+              break
+            case 'Firebase: Error (auth/email-already-in-use).':
+              errorMessageDisplay.classList.remove('hidden');
+              errorMessageDisplay.innerHTML = "Email Already Used";
+              break
+          };
+          console.log(errorMessage);
+        });
+      }
+    })
+  } else {
+    errorMessageDisplay.classList.remove('hidden');
+    errorMessageDisplay.innerHTML = "No Display Name";
+  }
 });
 
 login.addEventListener("click", () => {
@@ -96,13 +137,27 @@ login.addEventListener("click", () => {
     console.log("Logged In")
   })
   .catch((error) => {
-    const errorCode = error.code
-    const errorMessage = error.message
-    console.log(errorMessage)
+    const errorMessage = error.message;
+    switch (errorMessage) {
+      case 'Firebase: Error (auth/invalid-credential).':
+        errorMessageDisplay.classList.remove('hidden');
+        errorMessageDisplay.innerHTML = "Invalid Password";
+        break
+      case 'Firebase: Error (auth/invalid-email).':
+        errorMessageDisplay.classList.remove('hidden');
+        errorMessageDisplay.innerHTML = "Invalid Email";
+        break
+    };
+    console.log(errorMessage);
   });
 });
 
 logOut.addEventListener("click", () => {
+  signOut(auth);
+  console.log("Signed Out")
+});
+
+logOutVerification.addEventListener("click", () => {
   signOut(auth);
   console.log("Signed Out")
 });

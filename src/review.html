@@ -41,13 +41,16 @@
             <input class="user-input"  id="signInPassword" type="password" placeholder="Password" autocomplete="off">
             <button class="user-input"  id="signInButton">Log In</button>
         </section>
+        <h1 id="errorcode" class="message hidden"></h1>
     </div>
 
     <div id="verificationPage" class="notice hidden">
         <h1>Please Verify Your Account To Continue</h1>
         <h2>An email should have been sent to you. If you haven't revieved one, check your spam.</h2>
-        <h2>If you still haven't revieved an email, <span id="resendButton">click here to try again.</span></h2>
-        <h3>Once you have verified your email, reload this page.</h3>
+        <h2>Once you have verified your email, reload this page.</h2>
+        <h3>If you need to resend the email, click the button below. Note that you can only resend the verification once.</h3>
+        <button id="resendButton" class="user-input">Resend Email</button>
+        <button id="logoutButton" class="user-input">Log Out</button>
     </div>
 
     <div id="mainPage" class="wrapper hidden">
@@ -76,16 +79,16 @@
                 <option value=2>Scriptux</option>
                 <option value=3>Patient Health Record</option>
             </select>
-            <div id="rating" class="rating">
+            <div id="rating" class="rating unavailable">
                 <i class="fa fa-star-o" id="1Star"></i>
                 <i class="fa fa-star-o" id="2Stars"></i>
                 <i class="fa fa-star-o" id="3Stars"></i>
                 <i class="fa fa-star-o" id="4Stars"></i>
                 <i class="fa fa-star-o" id="5Stars"></i>
             </div>
-            <textarea id="message" class="message" placeholder="comment"></textarea>
-            <button id="submitForm" class="submit-form">Submit Review</button>
-            <button id="deleteReview" class="delete-review">Delete Review</button>
+            <textarea disabled id="message" class="message unavailable" placeholder="comment"></textarea>
+            <button id="submitForm" class="submit-form unavailable">Submit Review</button>
+            <button id="deleteReview" class="delete-review unavailable">Delete Review</button>
         </div>
     </div>
     

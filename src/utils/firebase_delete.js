@@ -22,8 +22,10 @@ const comment = document.getElementById("message");
 const db = getDatabase();
 
 deleteButton.addEventListener("click", () => {
-  deleteConfirmWindow.classList.remove("hidden");
-  console.log("Confirmation Window Opened")
+  if (!deleteButton.classList.contains('unavailable')) {
+    deleteConfirmWindow.classList.remove("hidden");
+    console.log("Confirmation Window Opened")
+  }
 });
 
 confirmDeleteButton.addEventListener("click", () => {

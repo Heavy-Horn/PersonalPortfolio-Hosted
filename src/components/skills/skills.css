@@ -5,6 +5,23 @@
   flex-grow: 1;
 }
 
+.moreButton {
+  font-family: inter;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  color: #FCFAF9;
+  width: fit-content;
+}
+
+.moreButton:hover {
+  font-family: inter;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  color: #FCFAF9;
+  cursor: pointer;
+  width: fit-content;
+}
+
 .profile {
   grid-column: 2/3;
   grid-row: 2/4;

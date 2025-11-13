@@ -318,3 +318,8 @@
 .hidden {
   display: none !important;
 }
+
+.unavailable {
+  background: grey !important;
+  color: lightgrey !important;
+}
